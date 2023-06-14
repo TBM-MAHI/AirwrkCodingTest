@@ -1,10 +1,14 @@
-/* //task 1
+//task 1
 let text = "The quick brown fox jumps over the lazy dog. The dog was not amused."
+let characters = text.split('');
+console.log(characters)
+console.log(characters.length)
 let sentences = text.toLowerCase().split('. ').length;
 //console.log(sentences)
 let words = text.toLowerCase().split(/[\s.]+/);
 words.splice(words.length - 1, 1);
 console.log('word count', words.length);
+
 let wordCount_Mapping = {};
 
 for (let w of words) {
@@ -35,7 +39,7 @@ words.forEach((w) => {
 console.log(longest_word_length);
 console.log(longest_word);
 console.log(wordCount_Mapping)
- */
+
 //task 2
 function calculate_Similarity(text1,text2 ) {
     text1 = text1.toLowerCase();
@@ -63,4 +67,4 @@ function calculate_Similarity(text1,text2 ) {
 }
   let text2 = "The quick brown fox jumps over the lazy dog.";
   let text1 = "The dog was not amused.";
-calculate_Similarity(text1, text2);
+//calculate_Similarity(text1, text2);
