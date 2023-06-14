@@ -1,5 +1,5 @@
 const express = require("express");
-const app = require('./server');
+const app = require("./server");
 
 const request = require("supertest");
 
@@ -9,48 +9,38 @@ describe("TEST POST /analyze ", () => {
   };
   let invalidData = {
     text: 999,
-    };
-    let emptyData = {};
+  };
+  let emptyData = {};
   let errorMessage1 = {
     message: "Invalid Input",
   };
 
   test("it should respond with 200 success", () => {
-      request(app)
-          .post("/v1/analyze")
-          .send(validData)
-          .expect(200)
-          .expect("content-type", /json/)
-          .end(function (err, res) {
-              if (err) return done(err);
-              return done();
-          });
+    request(app)
+      .post("/v1/analyze")
+      .send(validData)
+      .expect(200)
+      .expect("content-type", /json/)
+      .end();
   });
 
-  test("it should detect invalid input",  () => {
+  test("it should detect invalid input", () => {
     request(app)
       .post("/v1/analyze")
       .send(invalidData)
       .expect(400)
       .expect("content-type", /json/)
-      .end(function (err, res) {
-        if (err) return done(err);
-        return done();
-      });;
-});
-    
-  test("it should detect empty input",  () => {
-      request(app)
-          .post("/v1/analyze")
-          .send(emptyData)
-          .expect(400)
-          .expect("content-type", /json/)
-          .end(function (err, res) {
-              if (err) return done(err);
-              return done();
-          });
-   });
-    
+      .end();
+  });
+
+  test("it should detect empty input", () => {
+    request(app)
+      .post("/v1/analyze")
+      .send(emptyData)
+      .expect(400)
+      .expect("content-type", /json/)
+      .end();
+  });
 });
 describe("TEST POST /similarity ", () => {
   let validData1 = {
@@ -62,8 +52,8 @@ describe("TEST POST /similarity ", () => {
     text2: "",
   };
   const expectedSimilarity1 = 32.5;
-    const expectedSimilarity2 = 0.0;
-    
+  const expectedSimilarity2 = 0.0;
+
   test("Calculate similarity for two strings", () => {
     return request(app)
       .post("/v1/similarity")
@@ -74,8 +64,8 @@ describe("TEST POST /similarity ", () => {
         expect(response.body.similarity).toBeCloseTo(expectedSimilarity1, 2)
       );
   });
-    test("Calculate similarity with an empty string", () => {
-      
+
+  test("Calculate similarity with an empty string", () => {
     return request(app)
       .post("/v1/similarity")
       .send(validData2)
@@ -85,6 +75,4 @@ describe("TEST POST /similarity ", () => {
         expect(response.body.similarity).toBeCloseTo(expectedSimilarity2, 2)
       );
   });
-    
-    
 });
