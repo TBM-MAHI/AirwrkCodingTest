@@ -11,10 +11,7 @@ describe("TEST POST /analyze ", () => {
     text: 999,
   };
   let emptyData = {};
-  let errorMessage1 = {
-    message: "Invalid Input",
-  };
-
+  
   test("it should respond with 200 success", () => {
     request(app)
       .post("/v1/analyze")
